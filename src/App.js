@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import TodoList from './components/todo-list'
+import AppHeader from './components/app-header'
+import SeachPanel from './components/search-panel'
 import './App.css';
+import ItemStatusFilter from './components/item-status-filter';
 
 function App() {
+  const todoData =  [
+    { id: 1, label: 'drink cofee', important: false },
+    {id: 2, label:  'build awesome app', important: true },
+    { id: 3, label:  'have a lunch', important: false },
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppHeader toDo={1} done={3}/>
+      <div className="top-panel d-flex">
+        <SeachPanel/>
+        <ItemStatusFilter/>
+      </div>
+        <h1>Hi</h1>
+        <TodoList todos={todoData}/>
     </div>
   );
 }
