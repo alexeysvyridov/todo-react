@@ -10,6 +10,10 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexeysvyridov/todo-react"
+},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
