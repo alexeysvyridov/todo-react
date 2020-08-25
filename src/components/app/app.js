@@ -4,8 +4,10 @@ import AppHeader from '../app-header'
 import SeachPanel from '../search-panel'
 import './app.css';
 import ItemStatusFilter from '../item-status-filter';
+import ItemAddForm from '../item-add-form/item-add-form';
 
 export default class App extends Component {
+  maxId = 100;
   state = {
     todoData: [
       { id: 1, label: 'drink cofee', important: false },
@@ -24,18 +26,46 @@ export default class App extends Component {
       }
     })
   }
-render() {
-  return (
-    <div className="App">
-      <AppHeader toDo={1} done={3}/>
-      <div className="top-panel d-flex">
-        <SeachPanel/>
-        <ItemStatusFilter/>
+  addItem = (text) => {
+
+    const newItem = {
+      id: this.maxId++,
+      label: text,
+      important: false
+    }
+
+    this.setState(({todoData})=> {
+      const newArr = [...todoData, newItem]
+      return {
+        todoData: newArr
+      }
+    })
+  }
+
+  onToggleImportant = (id) => {
+    console.log('toggle important', id)
+  }
+  onToggleDone = (id) => {
+    console.log('toggle Done', id)
+  }
+  render() {
+    return (
+      <div className="App">
+        <AppHeader toDo={1} done={3}
+        />
+        <div className="top-panel d-flex">
+          <SeachPanel/>
+          <ItemStatusFilter/>
+        </div>
+          <h1>Hi</h1>
+          <TodoList todos={this.state.todoData}
+          onDeleted={this.deleteItem}
+          onToggleDone={this.onToggleDone}
+          onToggleImportant={this.onToggleImportant}
+          />
+          <ItemAddForm
+          onItemAdded={this.addItem} />
       </div>
-        <h1>Hi</h1>
-        <TodoList todos={this.state.todoData}
-        onDeleted={this.deleteItem}/>
-    </div>
-  );
-}
-}
+    );
+  }
+};
